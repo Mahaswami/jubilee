@@ -196,12 +196,12 @@ Gem::Specification.new do |s|
     else
       s.add_dependency(%q<rack>, [">= 1.4.1"])
       s.add_dependency(%q<spoon>, ["~> 0.0.4"])
-      s.add_dependency(%q<jeweler>, ["~> 1.8.7"])
+      s.add_dependency(%q<jeweler>, ["~> 2.3.7"])
     end
   else
     s.add_dependency(%q<rack>, [">= 1.4.1"])
     s.add_dependency(%q<spoon>, ["~> 0.0.4"])
-    s.add_dependency(%q<jeweler>, ["~> 1.8.7"])
+    s.add_dependency(%q<jeweler>, ["~> 2.3.7"])
   end
 end
 

@@ -60,9 +60,9 @@ public class RubyNetSocket extends RubyObject {
             else sock.pause();
         });
 
-        this.sock.endHandler(new VoidHandler() {
+        this.sock.endHandler(new Handler<Void>() {
             @Override
-            protected void handle() {
+            public void handle(Void event) {
                 eof.set(true);
             }
         });

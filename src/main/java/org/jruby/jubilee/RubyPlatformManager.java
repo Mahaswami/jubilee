@@ -49,7 +49,7 @@ public class RubyPlatformManager extends RubyObject {
         RubySymbol cluster_port_k = runtime.newSymbol("cluster_port");
 
         VertxOptions vertxOptions = new VertxOptions();
-        long maxEventLoopExecuteTime = 6000000000L;
+        long maxEventLoopExecuteTime = 6000000000L * 8;
         vertxOptions.setMaxEventLoopExecuteTime(maxEventLoopExecuteTime);
         if (options.containsKey(clustered_k) && options.op_aref(context, clustered_k).isTrue()) {
             int clusterPort = 0;
@@ -59,7 +59,7 @@ public class RubyPlatformManager extends RubyObject {
             if (options.containsKey(cluster_host_k))
                 clusterHost = options.op_aref(context, cluster_host_k).asJavaString();
             if (clusterHost == null) clusterHost = getDefaultAddress();
-            vertxOptions.setClustered(true).setClusterHost(clusterHost).setClusterPort(clusterPort);
+            vertxOptions.setClustered(true).setClusterHost(clusterHost).setClusterPort(clusterPort).setWorkerPoolSize(200);
             Vertx.clusteredVertx(vertxOptions, result -> {
                 System.out.println("VERTX DEBUG: Clustered Vertx Instance Creation Completed.");
                 this.vertx = result.result();
@@ -141,6 +141,7 @@ public class RubyPlatformManager extends RubyObject {
         map.put("ssl", ssl);
         if (options.has_key_p(eventbus_prefix_k).isTrue())
             map.put("event_bus", options.op_aref(context, eventbus_prefix_k).asJavaString());
+        System.out.println("vertx_inside DeploymentOptions map data............" + map);
         return new DeploymentOptions().setConfig(map);
     }
 

@@ -67,12 +67,15 @@ public class RackApplication {
             eof.set(true);
         });
         request.exceptionHandler(ignore -> {
+            System.out.println("vertx_inside exceptionHandler....................");
             eof.set(true);
         });
 //        } else {
 //            input = nullio;
 //        }
         vertx.executeBlocking((future) -> {
+            // does it come here?
+            System.out.println("vertx_inside executeBlocking...............");
             // This is a different context, do NOT replace runtime.getCurrentContext()
             ThreadContext context = runtime.getCurrentContext();
             RubyHash env = null;

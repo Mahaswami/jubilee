@@ -69,7 +69,7 @@ Rake::RDocTask.new do |rdoc|
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
 
-require 'ant'
+# require 'ant'
 
 desc "Clean up build artifacts"
 task :clean do

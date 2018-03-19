@@ -80,8 +80,12 @@ public class RubyPlatformManager extends RubyObject {
                 Thread.sleep(10000);
             } catch (Exception e) {}            
         } else {
-            this.vertx = Vertx.vertx(vertxOptions);
-            JubileeVertx.init(this.vertx);
+            try{
+                this.vertx = Vertx.vertx(vertxOptions);
+                JubileeVertx.init(this.vertx);
+            }catch(Exception e){
+                bugsnag.notify(e);
+            }
         }
         return this;
     }

@@ -18,8 +18,6 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import com.bugsnag.Bugsnag;
-
 /**
  * Created with IntelliJ IDEA.
  * User: isaiah
@@ -27,7 +25,6 @@ import com.bugsnag.Bugsnag;
  * Time: 5:40 PM
  */
 public class RackApplication {
-    Bugsnag bugsnag = new Bugsnag("f526aba94630fa38d5deae4c0b87bd22");
     private IRubyObject app;
     private boolean ssl;
     private boolean hideErrorStack;
@@ -70,7 +67,7 @@ public class RackApplication {
             eof.set(true);
         });
         request.exceptionHandler(ignore -> {
-            bugsnag.notify(ignore);
+            Const.bugsnag.notify(ignore);
             System.out.println("vertx_inside exceptionHandler....................");
             eof.set(true);
         });
@@ -78,7 +75,6 @@ public class RackApplication {
 //            input = nullio;
 //        }
         vertx.executeBlocking((future) -> {
-            // does it come here?
             System.out.println("vertx_inside executeBlocking...............");
             // This is a different context, do NOT replace runtime.getCurrentContext()
             ThreadContext context = runtime.getCurrentContext();
@@ -119,7 +115,7 @@ public class RackApplication {
     private void fail(final Throwable e, final HttpServerRequest request) {
         request.response().setStatusCode(500);
         String message = "Jubilee caught this error: " + e.getMessage() + "\n";
-        bugsnag.notify(e);
+        Const.bugsnag.notify(e);
         StringWriter stringWriter = new StringWriter();
         PrintWriter printWriter = new PrintWriter(stringWriter);
         e.printStackTrace(printWriter);

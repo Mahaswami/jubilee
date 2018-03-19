@@ -16,13 +16,10 @@ import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.util.Enumeration;
 
-import com.bugsnag.Bugsnag;
-
 /**
  * Created by isaiah on 23/01/2014.
  */
 public class RubyPlatformManager extends RubyObject {
-    Bugsnag bugsnag = new Bugsnag("f526aba94630fa38d5deae4c0b87bd22");
 
     private RubyHash options;
     private Vertx vertx;
@@ -56,24 +53,22 @@ public class RubyPlatformManager extends RubyObject {
         long maxEventLoopExecuteTime = 6000000000L * 8;
         vertxOptions.setMaxEventLoopExecuteTime(maxEventLoopExecuteTime);
         if (options.containsKey(clustered_k) && options.op_aref(context, clustered_k).isTrue()) {
-            try {
-                int clusterPort = 0;
-                String clusterHost = null;
-                if (options.containsKey(cluster_port_k))
-                    clusterPort = RubyNumeric.num2int(options.op_aref(context, cluster_port_k));
-                if (options.containsKey(cluster_host_k))
-                    clusterHost = options.op_aref(context, cluster_host_k).asJavaString();
-                if (clusterHost == null) clusterHost = getDefaultAddress();
-                vertxOptions.setClustered(true).setClusterHost(clusterHost).setClusterPort(clusterPort).setWorkerPoolSize(200);
-                Vertx.clusteredVertx(vertxOptions, result -> {
-                    System.out.println("VERTX DEBUG: Clustered Vertx Instance Creation Completed.");
-                    this.vertx = result.result();
-                    JubileeVertx.init(this.vertx);
-                });
-            }
-            catch(Exception e) {
-                bugsnag.notify(e);
-            } 
+            int clusterPort = 0;
+            String clusterHost = null;
+            if (options.containsKey(cluster_port_k))
+                clusterPort = RubyNumeric.num2int(options.op_aref(context, cluster_port_k));
+            if (options.containsKey(cluster_host_k))
+                clusterHost = options.op_aref(context, cluster_host_k).asJavaString();
+            if (clusterHost == null) clusterHost = getDefaultAddress();
+            vertxOptions.setClustered(true).setClusterHost(clusterHost).setClusterPort(clusterPort).setWorkerPoolSize(200);
+            Vertx.clusteredVertx(vertxOptions, result -> {
+                System.out.println("VERTX DEBUG: Clustered Vertx Instance Creation Completed.");
+                this.vertx = result.result();
+                JubileeVertx.init(this.vertx);
+                this.vertx.exceptionHandler(err -> {
+                  Const.bugsnag.notify(err);
+                });                    
+            });
             try {
                 // Temporarily waiting for 10 seconds for cluster to start
                 // Need a better mode to wait until it really starts    
@@ -84,7 +79,7 @@ public class RubyPlatformManager extends RubyObject {
                 this.vertx = Vertx.vertx(vertxOptions);
                 JubileeVertx.init(this.vertx);
             }catch(Exception e){
-                bugsnag.notify(e);
+                Const.bugsnag.notify(e);
             }
         }
         return this;

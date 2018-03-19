@@ -110,6 +110,13 @@
       <scope>provided</scope>
     </dependency>
 
+    <!-- https://mvnrepository.com/artifact/com.bugsnag/bugsnag -->
+    <dependency>
+        <groupId>com.bugsnag</groupId>
+        <artifactId>bugsnag</artifactId>
+        <version>3.1.5</version>
+    </dependency>
+
     <!-- Add any other dependencies that you want packaged into your module (in the lib dir) here
     as 'compile' dependencies. Here is an example
     <dependency>

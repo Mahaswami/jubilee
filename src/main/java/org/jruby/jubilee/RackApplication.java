@@ -18,6 +18,8 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import com.bugsnag.Bugsnag;
+
 /**
  * Created with IntelliJ IDEA.
  * User: isaiah
@@ -25,6 +27,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * Time: 5:40 PM
  */
 public class RackApplication {
+    Bugsnag bugsnag = new Bugsnag("f526aba94630fa38d5deae4c0b87bd22");
     private IRubyObject app;
     private boolean ssl;
     private boolean hideErrorStack;
@@ -67,6 +70,7 @@ public class RackApplication {
             eof.set(true);
         });
         request.exceptionHandler(ignore -> {
+            bugsnag.notify(ignore);
             System.out.println("vertx_inside exceptionHandler....................");
             eof.set(true);
         });
@@ -115,6 +119,7 @@ public class RackApplication {
     private void fail(final Throwable e, final HttpServerRequest request) {
         request.response().setStatusCode(500);
         String message = "Jubilee caught this error: " + e.getMessage() + "\n";
+        bugsnag.notify(e);
         StringWriter stringWriter = new StringWriter();
         PrintWriter printWriter = new PrintWriter(stringWriter);
         e.printStackTrace(printWriter);

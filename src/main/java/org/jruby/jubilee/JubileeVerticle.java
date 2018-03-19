@@ -19,10 +19,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.bugsnag.Bugsnag;
+
 /**
  * Created by isaiah on 23/01/2014.
  */
 public class JubileeVerticle extends AbstractVerticle {
+    Bugsnag bugsnag = new Bugsnag("f526aba94630fa38d5deae4c0b87bd22");
 
     @Override
     public void start() throws Exception {
@@ -64,6 +67,7 @@ public class JubileeVerticle extends AbstractVerticle {
                 app.call(ctx.request());
             });
         } catch (IOException e) {
+            bugsnag.notify(e);
             System.out.println("vertx_inside start() catch.................");
             runtime.getErrorStream().println("Failed to create RackApplication");
         }

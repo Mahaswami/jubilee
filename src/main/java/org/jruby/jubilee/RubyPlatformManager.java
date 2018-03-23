@@ -15,6 +15,7 @@ import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.util.Enumeration;
+import com.bugsnag.Bugsnag;
 
 /**
  * Created by isaiah on 23/01/2014.
@@ -48,19 +49,28 @@ public class RubyPlatformManager extends RubyObject {
         RubySymbol clustered_k = runtime.newSymbol("clustered");
         RubySymbol cluster_host_k = runtime.newSymbol("cluster_host");
         RubySymbol cluster_port_k = runtime.newSymbol("cluster_port");
+        RubySymbol worker_pool_size = runtime.newSymbol("worker_pool_size");
+        RubySymbol bugsnag_key = runtime.newSymbol("bugsnag_key");
+        String bugsnagKey = this.options.op_aref(context, bugsnag_key).asJavaString();
+        System.out.println("******** Bugsnag Key: " + bugsnagKey); 
+        Const.bugsnag = new Bugsnag(bugsnagKey);
 
         VertxOptions vertxOptions = new VertxOptions();
         long maxEventLoopExecuteTime = 6000000000L * 8;
         vertxOptions.setMaxEventLoopExecuteTime(maxEventLoopExecuteTime);
         if (options.containsKey(clustered_k) && options.op_aref(context, clustered_k).isTrue()) {
             int clusterPort = 0;
+            int workerPoolSize = 20;
             String clusterHost = null;
+            if (options.containsKey(worker_pool_size))
+                workerPoolSize = RubyNumeric.num2int(options.op_aref(context, worker_pool_size));
             if (options.containsKey(cluster_port_k))
                 clusterPort = RubyNumeric.num2int(options.op_aref(context, cluster_port_k));
             if (options.containsKey(cluster_host_k))
                 clusterHost = options.op_aref(context, cluster_host_k).asJavaString();
-            if (clusterHost == null) clusterHost = getDefaultAddress();
-            vertxOptions.setClustered(true).setClusterHost(clusterHost).setClusterPort(clusterPort).setWorkerPoolSize(200);
+            if (clusterHost == null) clusterHost = getDefaultAddress();            
+            System.out.println("********** Worker pool size: " + workerPoolSize);            
+            vertxOptions.setClustered(true).setClusterHost(clusterHost).setClusterPort(clusterPort).setWorkerPoolSize(workerPoolSize);
             Vertx.clusteredVertx(vertxOptions, result -> {
                 System.out.println("VERTX DEBUG: Clustered Vertx Instance Creation Completed.");
                 this.vertx = result.result();

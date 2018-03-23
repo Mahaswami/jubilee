@@ -28,5 +28,5 @@ public final class Const {
 
     // Internal
     public static final byte EOL = '\n';
-    public static final Bugsnag bugsnag = new Bugsnag("f526aba94630fa38d5deae4c0b87bd22");
+    public static Bugsnag bugsnag = new Bugsnag("");
 }

@@ -60,7 +60,7 @@ public class JubileeVerticle extends AbstractVerticle {
                 }));
             }
             router.route("/*").handler(ctx -> {
-                System.out.println("vertx_inside JubileeVerticle router..............."); 
+                // System.out.println("vertx_inside JubileeVerticle router..............."); 
                 app.call(ctx.request());
             });
         } catch (IOException e) {

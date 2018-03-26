@@ -93,7 +93,7 @@ module Jubilee
         o.on "-n", "--instances NUM", "Define how many instances of web servers to run, default 4" do |arg|
           @options[:instances] = arg.to_i
         end
-        o.on "--wps NUM", "Worker pool size for vertxOptions" do |arg|
+        o.on "--worker-size NUM", "Worker pool size for vertxOptions" do |arg|
           @options[:worker_pool_size] = arg.to_i
         end
         o.on "--bugsnag KEY", "bugsnag key" do |arg|

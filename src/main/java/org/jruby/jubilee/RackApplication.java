@@ -75,7 +75,7 @@ public class RackApplication {
 //            input = nullio;
 //        }
         vertx.executeBlocking((future) -> {
-            System.out.println("vertx_inside executeBlocking...............");
+            // System.out.println("vertx_inside executeBlocking...............");
             // This is a different context, do NOT replace runtime.getCurrentContext()
             ThreadContext context = runtime.getCurrentContext();
             RubyHash env = null;

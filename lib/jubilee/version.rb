@@ -1,7 +1,7 @@
 module Jubilee
   module Version
     MAJOR = 3
-    MINOR = 0
+    MINOR = 5
     PATCH = 0
     BUILD = "beta2"
 

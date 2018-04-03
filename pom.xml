@@ -6,7 +6,7 @@
   <groupId>org.jruby.jubilee</groupId>
   <artifactId>mod-rack</artifactId>
   <packaging>jar</packaging>
-  <version>3.0.0-SNAPSHOT</version>
+  <version>3.5.0-SNAPSHOT</version>
   <name>Project - mod-rack</name>
   <url>http://maven.apache.org</url>
 

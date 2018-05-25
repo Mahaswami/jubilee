@@ -117,6 +117,21 @@
         <version>3.1.5</version>
     </dependency>
 
+    <!-- https://mvnrepository.com/artifact/io.vertx/vertx-shell -->
+    <dependency>
+        <groupId>io.vertx</groupId>
+        <artifactId>vertx-shell</artifactId>
+        <version>3.5.1</version>
+    </dependency>
+
+    <!-- Used for deploying service:io.vertx.ext.shell -->
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-service-factory</artifactId>
+      <version>3.5.1</version>
+    </dependency>
+
+
     <!-- Add any other dependencies that you want packaged into your module (in the lib dir) here
     as 'compile' dependencies. Here is an example
     <dependency>

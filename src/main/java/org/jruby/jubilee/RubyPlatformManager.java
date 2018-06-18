@@ -109,6 +109,14 @@ public class RubyPlatformManager extends RubyObject {
                 result.cause().printStackTrace(context.runtime.getErrorStream());
             }
         });
+        this.vertx.deployVerticle("service:io.vertx.ext.shell",
+            new DeploymentOptions().setConfig(
+                new JsonObject().put("telnetOptions",
+                    new JsonObject().
+                        put("host", "0.0.0.0").
+                        put("port", 4000))
+            )
+        );
         return this;
 
     }

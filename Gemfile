@@ -1,11 +1,11 @@
 source 'http://rubygems.org'
 
-gem 'rack', '>= 1.4.1'
+gem 'rack', '~> 1.4', '>= 1.4.1'
 #gem 'rack', path: "../../ruby/rack"
 gem 'spoon', '~> 0.0.4'
 
 group :development do
-  gem 'jeweler', '~> 1.8.7'
+  gem 'jeweler', '~> 1.8', '>= 1.8.7'
 end
 
 group :test do

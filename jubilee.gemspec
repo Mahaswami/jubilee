@@ -6,7 +6,7 @@
 
 Gem::Specification.new do |s|
   s.name = "jubilee"
-  s.version = "3.0.0.beta2"
+  s.version = "3.0.1.beta1"
   s.platform = "java"
 
   s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
@@ -190,18 +190,18 @@ Gem::Specification.new do |s|
     s.specification_version = 4
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<rack>, [">= 1.4.1"])
+      s.add_runtime_dependency 'rack', '~> 1.4', '>= 1.4.1'
       s.add_runtime_dependency(%q<spoon>, ["~> 0.0.4"])
-      s.add_development_dependency(%q<jeweler>, ["~> 1.8.7"])
+      s.add_development_dependency 'jeweler', '~> 1.8', '>= 1.8.7'
     else
-      s.add_dependency(%q<rack>, [">= 1.4.1"])
+      s.add_runtime_dependency 'rack', '~> 1.4', '>= 1.4.1'
       s.add_dependency(%q<spoon>, ["~> 0.0.4"])
-      s.add_dependency(%q<jeweler>, ["~> 1.8.7"])
+      s.add_development_dependency 'jeweler', '~> 1.8', '>= 1.8.7'
     end
   else
-    s.add_dependency(%q<rack>, [">= 1.4.1"])
+    s.add_runtime_dependency 'rack', '~> 1.4', '>= 1.4.1'
     s.add_dependency(%q<spoon>, ["~> 0.0.4"])
-    s.add_dependency(%q<jeweler>, ["~> 1.8.7"])
+    s.add_development_dependency 'jeweler', '~> 1.8', '>= 1.8.7'
   end
 end
 

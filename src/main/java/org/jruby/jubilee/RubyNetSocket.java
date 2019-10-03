@@ -115,7 +115,7 @@ public class RubyNetSocket extends RubyObject {
             waitWritable(this.sock);
         this.sock.write(data.asJavaString());
         // TODO return the length actually written
-        return data.length();
+        return data;
     }
 
     @JRubyMethod(name = "close_write")

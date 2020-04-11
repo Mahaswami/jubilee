@@ -181,6 +181,8 @@ Gem::Specification.new do |s|
     "test/jubilee/test_upload.rb",
     "test/test_helper.rb"
   ]
+  s.files += Dir['jars/*']
+  s.files += Dir['lib/*.rb']
   s.homepage = "http://isaiah.github.io/jubilee"
   s.licenses = ["MIT"]
   s.rubygems_version = "2.4.8"

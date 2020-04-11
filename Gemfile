@@ -5,14 +5,15 @@ gem 'rack', '~> 1.4', '>= 1.4.1'
 gem 'spoon', '~> 0.0.4'
 
 group :development do
-  gem 'jeweler', '~> 1.8', '>= 1.8.7'
+  # gem 'jeweler', '~> 1.8.7'
+  gem 'jeweler', '~> 2.1', '>= 2.1.1'
 end
 
 group :test do
   gem 'guard'
   gem 'guard-minitest'
   gem 'multipart-post'
-  gem 'rcov'
+  # gem 'rcov'
   gem 'rspec'
   gem 'capybara'
   gem 'poltergeist'

@@ -64,6 +64,8 @@ module Jubilee
         Port: 8080,
         instances: 4,
         quiet: false,
+        worker_pool_size: 20,
+        bugsnag_key: "",
         environment: ENV["RACK_ENV"] || "development"
       }
       @parser = OptionParser.new do |o|
@@ -90,6 +92,12 @@ module Jubilee
         end
         o.on "-n", "--instances NUM", "Define how many instances of web servers to run, default 4" do |arg|
           @options[:instances] = arg.to_i
+        end
+        o.on "--worker-size NUM", "Worker pool size for vertxOptions" do |arg|
+          @options[:worker_pool_size] = arg.to_i
+        end
+        o.on "--bugsnag KEY", "bugsnag key" do |arg|
+          @options[:bugsnag_key] = arg
         end
         o.separator ""
         o.separator "SSL options:"

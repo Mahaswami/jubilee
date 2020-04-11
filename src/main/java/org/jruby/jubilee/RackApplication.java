@@ -67,12 +67,15 @@ public class RackApplication {
             eof.set(true);
         });
         request.exceptionHandler(ignore -> {
+            Const.bugsnag.notify(ignore);
+            System.out.println("vertx_inside exceptionHandler....................");
             eof.set(true);
         });
 //        } else {
 //            input = nullio;
 //        }
         vertx.executeBlocking((future) -> {
+            // System.out.println("vertx_inside executeBlocking...............");
             // This is a different context, do NOT replace runtime.getCurrentContext()
             ThreadContext context = runtime.getCurrentContext();
             RubyHash env = null;
@@ -112,6 +115,7 @@ public class RackApplication {
     private void fail(final Throwable e, final HttpServerRequest request) {
         request.response().setStatusCode(500);
         String message = "Jubilee caught this error: " + e.getMessage() + "\n";
+        Const.bugsnag.notify(e);
         StringWriter stringWriter = new StringWriter();
         PrintWriter printWriter = new PrintWriter(stringWriter);
         e.printStackTrace(printWriter);

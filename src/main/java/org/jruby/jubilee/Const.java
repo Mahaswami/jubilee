@@ -1,5 +1,7 @@
 package org.jruby.jubilee;
 
+import com.bugsnag.Bugsnag;
+
 /**
  * Created with IntelliJ IDEA.
  * User: isaiah
@@ -26,4 +28,5 @@ public final class Const {
 
     // Internal
     public static final byte EOL = '\n';
+    public static Bugsnag bugsnag = new Bugsnag("");
 }

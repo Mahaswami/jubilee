@@ -26,6 +26,7 @@ public class JubileeVerticle extends AbstractVerticle {
 
     @Override
     public void start() throws Exception {
+        System.out.println("******** Vertx: 1"); 
         JsonObject config = config();
         HttpServerOptions httpServerOptions = new HttpServerOptions();
         httpServerOptions.setPort(config.getInteger("port"));
@@ -48,8 +49,10 @@ public class JubileeVerticle extends AbstractVerticle {
         }
         Router router = Router.router(vertx);
         try {
+            System.out.println("******** Vertx: 2"); 
             app = new RackApplication(vertx, runtime.getCurrentContext(), rackApplication, config);
             if (config.containsKey("event_bus")) {
+                System.out.println("******** Vertx: 3");
                 BridgeOptions options = new BridgeOptions().addOutboundPermitted(new PermittedOptions().setAddressRegex(".+"));
                 options.addInboundPermitted(new PermittedOptions().setAddressRegex(".+"));
                 router.route("/" + config.getString("event_bus") + "/*").handler(SockJSHandler.create(vertx).bridge(options, event -> {
@@ -57,9 +60,12 @@ public class JubileeVerticle extends AbstractVerticle {
                 }));
             }
             router.route("/*").handler(ctx -> {
+                // System.out.println("vertx_inside JubileeVerticle router..............."); 
                 app.call(ctx.request());
             });
         } catch (IOException e) {
+            Const.bugsnag.notify(e);
+            System.out.println("vertx_inside start() catch.................");
             runtime.getErrorStream().println("Failed to create RackApplication");
         }
 

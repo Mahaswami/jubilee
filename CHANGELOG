@@ -1,6 +1,7 @@
 Release 2.1.2
 =============
-* Upgrade to be compatible to JRuby 9.2.8.0
+* Upgrade to be compatible to JRuby 9.2.11.0
+* Vertx upgrade to 3.9.0
 
 Release 2.1.0
 =============

@@ -36,9 +36,10 @@
     <mods.directory>target/mods</mods.directory>
 
     <!--Dependency versions-->
-    <vertx.version>3.3.3</vertx.version>
+    <vertx.version>3.9.0</vertx.version>
     <vertx.testtools.version>2.0.3-final</vertx.testtools.version>
     <junit.version>4.12</junit.version>
+    <bugsnag.version>3.5.1</bugsnag.version>
 
     <!--Plugin versions-->
     <maven.compiler.plugin.version>3.0</maven.compiler.plugin.version>
@@ -106,7 +107,7 @@
     <dependency>
       <groupId>org.jruby</groupId>
       <artifactId>jruby-complete</artifactId>
-      <version>9.2.8.0</version>
+      <version>9.2.11.0</version>
       <scope>provided</scope>
     </dependency>
 
@@ -114,21 +115,21 @@
     <dependency>
         <groupId>com.bugsnag</groupId>
         <artifactId>bugsnag</artifactId>
-        <version>3.1.5</version>
+        <version>${bugsnag.version}</version>
     </dependency>
 
     <!-- https://mvnrepository.com/artifact/io.vertx/vertx-shell -->
     <dependency>
         <groupId>io.vertx</groupId>
         <artifactId>vertx-shell</artifactId>
-        <version>3.5.1</version>
+        <version>${vertx.version}</version>
     </dependency>
 
     <!-- Used for deploying service:io.vertx.ext.shell -->
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-service-factory</artifactId>
-      <version>3.5.1</version>
+      <version>${vertx.version}</version>
     </dependency>
 
 

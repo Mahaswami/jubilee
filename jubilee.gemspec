@@ -6,7 +6,7 @@
 
 Gem::Specification.new do |s|
   s.name = "jubilee"
-  s.version = "3.0.1.beta1"
+  s.version = "3.0.2"
   s.platform = "java"
 
   s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=

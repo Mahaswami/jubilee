@@ -55,9 +55,11 @@ public class JubileeVerticle extends AbstractVerticle {
                 System.out.println("******** Vertx: 3");
                 BridgeOptions options = new BridgeOptions().addOutboundPermitted(new PermittedOptions().setAddressRegex(".+"));
                 options.addInboundPermitted(new PermittedOptions().setAddressRegex(".+"));
-                router.route("/" + config.getString("event_bus") + "/*").handler(SockJSHandler.create(vertx).bridge(options, event -> {
-                    event.complete(true);
-                }));
+                router.route("/" + config.getString("event_bus") + "/*").handler(routingHandler -> {
+                    SockJSHandler.create(vertx).bridge(options, event -> {
+                                        event.complete(true);
+                                    });
+                });
             }
             router.route("/*").handler(ctx -> {
                 // System.out.println("vertx_inside JubileeVerticle router..............."); 

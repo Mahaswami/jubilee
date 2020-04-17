@@ -255,12 +255,6 @@ public class RackEnvironmentHash extends RubyHash {
     }
 
     @Override
-    public RubyFixnum hash19() {
-        fillEntireHash();
-        return super.hash19();
-    }
-
-    @Override
     public IRubyObject fetch(ThreadContext context, IRubyObject[] args, Block block) {
         fillEntireHash();
         return super.fetch(context, args, block);
@@ -330,18 +324,6 @@ public class RackEnvironmentHash extends RubyHash {
     public IRubyObject key(ThreadContext context, IRubyObject expected) {
         fillEntireHash();
         return super.key(context, expected);
-    }
-
-    @Override
-    public RubyArray keys() {
-        fillEntireHash();
-        return super.keys();
-    }
-
-    @Override
-    public RubyArray rb_values() {
-        fillEntireHash();
-        return super.rb_values();
     }
 
     @Override
@@ -462,18 +444,6 @@ public class RackEnvironmentHash extends RubyHash {
     public IRubyObject flatten(ThreadContext context, IRubyObject level) {
         fillEntireHash();
         return super.flatten(context, level);
-    }
-
-    @Override
-    public IRubyObject getCompareByIdentity(ThreadContext context) {
-        fillEntireHash();
-        return super.getCompareByIdentity(context);
-    }
-
-    @Override
-    public IRubyObject getCompareByIdentity_p(ThreadContext context) {
-        fillEntireHash();
-        return super.getCompareByIdentity_p(context);
     }
 
     @Override
